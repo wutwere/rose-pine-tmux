@@ -242,7 +242,7 @@ main() {
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
-    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "")"
 
     # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
@@ -256,9 +256,12 @@ main() {
     local user_window_count
     user_window_count="$(get_tmux_option "@rose_pine_window_count" "")"
 
+    local RIGHT_ENDER=""
+    local LEFT_STARTER=""
+
     # Custom window status that goes between the number and the window name
-    local custom_window_sep="#[fg=#6d6a84]#I#[fg=#6d6a84,]$window_separator#[fg=#6d6a84]#W"
-    local custom_window_sep_current=" #I#[fg=$thm_gold,bg=""]$window_separator#[fg=$thm_gold,bg=""]#W "
+    local custom_window_sep="#[fg=$thm_surface,bg=$thm_base]$LEFT_STARTER#[fg=#6d6a84,bg=$thm_surface] #I$window_separator#W #[fg=$thm_surface,bg=$thm_base]$RIGHT_ENDER"
+    local custom_window_sep_current="#[fg=#252338,bg=$thm_base]$LEFT_STARTER#[fg=#e4bebb,bg=#252338] #I$window_separator#W #[fg=#252338,bg=$thm_base]$RIGHT_ENDER"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -288,7 +291,7 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S#[fg=#{?client_prefix,$thm_love,#e4bebb},bg=$thm_base] "
+    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,#e4bebb},bg=$thm_base]$RIGHT_ENDER"
 
     local show_user
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
@@ -347,7 +350,7 @@ main() {
         show_directory_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
         show_directory_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
         set window-status-style "fg=$thm_iris,bg=$bar_bg_disabled_color_option"
-        set window-status-current-style "fg=#e4bebb,bg=#252338"
+        set window-status-current-style "fg=$thm_gold,bg=$bar_bg_disabled_color_option"
         set window-status-activity-style "fg=$thm_rose,bg=$bar_bg_disabled_color_option"
         set message-style "fg=$thm_muted,bg=$bar_bg_disabled_color_option"
     fi
@@ -438,10 +441,10 @@ main() {
     fi
 
     # Defaults to a NerdFont icon, user can change through an option
-    if [[ "$window_status_separator" != "  " ]]; then
+    if [[ "$window_status_separator" != "" ]]; then
         setw window-status-separator "$window_status_separator"
     else
-        setw window-status-separator "  "
+        setw window-status-separator ""
     fi
 
     # Leaves only the window list on the left side
