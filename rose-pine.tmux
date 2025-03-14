@@ -260,8 +260,8 @@ main() {
     local LEFT_STARTER=""
 
     # Custom window status that goes between the number and the window name
-    local custom_window_sep="#[fg=#6d6a84,bg=$thm_base]#I$window_separator#W"
-    local custom_window_sep_current="#[fg=#e4bebb,bg=$thm_base]#I$window_separator#W"
+    local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator#W"
+    local custom_window_sep_current="#[fg=#e4bebb,bg=default]#I$window_separator#W"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -291,7 +291,7 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,#e4bebb},bg=$thm_base]$RIGHT_ENDER "
+    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,#e4bebb},bg=default]$RIGHT_ENDER "
 
     local show_user
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
