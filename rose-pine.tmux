@@ -257,8 +257,8 @@ main() {
     user_window_count="$(get_tmux_option "@rose_pine_window_count" "")"
 
     # Custom window status that goes between the number and the window name
-    local custom_window_sep="#[fg=$thm_iris]#I#[fg=$thm_iris,]$window_separator#[fg=$thm_iris]#W"
-    local custom_window_sep_current="#I#[fg=$thm_gold,bg=""]$window_separator#[fg=$thm_gold,bg=""]#W"
+    local custom_window_sep="#[fg=#6d6a84]#I#[fg=#6d6a84,]$window_separator#[fg=#6d6a84]#W"
+    local custom_window_sep_current=" #I#[fg=$thm_gold,bg=""]$window_separator#[fg=$thm_gold,bg=""]#W "
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -288,7 +288,7 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session=" #[fg=#{?client_prefix,$thm_love,$thm_text}]$current_session_icon #[fg=$thm_text]#S "
+    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S#[fg=#{?client_prefix,$thm_love,#e4bebb},bg=$thm_base] "
 
     local show_user
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
@@ -347,7 +347,7 @@ main() {
         show_directory_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
         show_directory_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
         set window-status-style "fg=$thm_iris,bg=$bar_bg_disabled_color_option"
-        set window-status-current-style "fg=$thm_gold,bg=$bar_bg_disabled_color_option"
+        set window-status-current-style "fg=#e4bebb,bg=#252338"
         set window-status-activity-style "fg=$thm_rose,bg=$bar_bg_disabled_color_option"
         set message-style "fg=$thm_muted,bg=$bar_bg_disabled_color_option"
     fi
