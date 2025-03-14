@@ -260,8 +260,8 @@ main() {
     local LEFT_STARTER=""
 
     # Custom window status that goes between the number and the window name
-    local custom_window_sep="#[fg=$thm_surface,bg=$thm_base]$LEFT_STARTER#[fg=#6d6a84,bg=$thm_surface] #I$window_separator#W #[fg=$thm_surface,bg=$thm_base]$RIGHT_ENDER"
-    local custom_window_sep_current="#[fg=#252338,bg=$thm_base]$LEFT_STARTER#[fg=#e4bebb,bg=#252338] #I$window_separator#W #[fg=#252338,bg=$thm_base]$RIGHT_ENDER"
+    local custom_window_sep="#[fg=#6d6a84,bg=$thm_base]#I$window_separator#W"
+    local custom_window_sep_current="#[fg=#e4bebb,bg=$thm_base]#I$window_separator#W"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -291,7 +291,7 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,#e4bebb},bg=$thm_base]$RIGHT_ENDER"
+    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,#e4bebb},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,#e4bebb},bg=$thm_base]$RIGHT_ENDER "
 
     local show_user
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
@@ -344,7 +344,7 @@ main() {
     # It sets the base colors for active / inactive, no matter the window appearence switcher choice
     # TEST: This needs to be tested further
     if [[ "$bar_bg_disable" == "on" ]]; then
-        set status-style "fg=$thm_pine,bg=$bar_bg_disabled_color_option"
+        set status-style "fg=#6d6a84,bg=$bar_bg_disabled_color_option"
         show_window_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#W"
         show_window_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#W"
         show_directory_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
