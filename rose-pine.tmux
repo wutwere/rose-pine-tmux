@@ -43,7 +43,7 @@ unset_option() {
 
 main() {
     local theme
-    theme="$(get_tmux_option "@rose_pine_variant" "")"
+    theme="$(get_tmux_option "@rose_pine_variant" "main")"
 
     # INFO: Not removing the thm_hl_low and thm_hl_med colors for posible features
     # INFO: If some variables appear unused, they are being used either externally
@@ -58,7 +58,7 @@ main() {
         thm_text="#e0def4";
         thm_love="#eb6f92";
         thm_gold="#f6c177";
-        thm_rose="#ebbcba";
+        thm_rose="#65D9EF";
         thm_pine="#31748f";
         thm_foam="#9ccfd8";
         thm_iris="#c4a7e7";
@@ -152,10 +152,10 @@ main() {
 
     # Shows truncated current working directory
     local directory
-    directory="$(get_tmux_option "@rose_pine_directory" "")"
+    directory="$(get_tmux_option "@rose_pine_directory" "on")"
 
     local disable_active_window_menu
-    disable_active_window_menu="$(get_tmux_option "@rose_pine_disable_active_window_menu" "")"
+    disable_active_window_menu="$(get_tmux_option "@rose_pine_disable_active_window_menu" "on")"
 
     local show_current_program
     show_current_program="$(get_tmux_option "@rose_pine_show_current_program" "")"
@@ -166,11 +166,11 @@ main() {
     readonly window_directory
 
     local window_separator 
-    window_separator="$(get_tmux_option "@rose_pine_window_separator" "")"
+    window_separator="$(get_tmux_option "@rose_pine_window_separator" ": ")"
     readonly window_separator 
 
     local default_window_behavior
-    default_window_behavior="$(get_tmux_option "@rose_pine_default_window_behavior" "")"
+    default_window_behavior="$(get_tmux_option "@rose_pine_default_window_behavior" "on")"
     readonly default_window_behavior
 
     # Changes the background color for the current active window
@@ -181,12 +181,12 @@ main() {
 
     # Transparency enabling for status bar
     local bar_bg_disable
-    bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "")"
+    bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "on")"
     readonly bar_bg_disable
 
     # Transparent option for status bar
     local bar_bg_disabled_color_option
-    bar_bg_disabled_color_option="$(get_tmux_option "@rose_pine_bar_bg_disabled_color_option" "0")"
+    bar_bg_disabled_color_option="$(get_tmux_option "@rose_pine_bar_bg_disabled_color_option" "default")"
     readonly bar_bg_disabled_color_option
 
     # Shows hostname of the computer the tmux session is run on
@@ -221,7 +221,7 @@ main() {
     readonly current_window_icon
 
     local current_session_icon
-    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "")"
+    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "󱥇 ")"
     readonly current_session_icon
 
     local username_icon
@@ -242,7 +242,7 @@ main() {
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
-    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "")"
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
 
     # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
