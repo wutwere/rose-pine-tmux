@@ -221,7 +221,7 @@ main() {
     readonly current_window_icon
 
     local current_session_icon
-    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "󱥇 ")"
+    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "󱥇 ")"
     readonly current_session_icon
 
     local username_icon
@@ -242,7 +242,7 @@ main() {
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
-    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
 
     # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
@@ -256,8 +256,8 @@ main() {
     local user_window_count
     user_window_count="$(get_tmux_option "@rose_pine_window_count" "")"
 
-    local RIGHT_ENDER=""
-    local LEFT_STARTER=""
+    local RIGHT_ENDER=""
+    local LEFT_STARTER=""
 
     # Custom window status that goes between the number and the window name
     local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator#W"
@@ -291,7 +291,7 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session="#[fg=#191724,bg=#{?client_prefix,$thm_love,$thm_rose},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,$thm_rose},bg=default]$RIGHT_ENDER "
+    readonly show_session="#[fg=#{?client_prefix,$thm_love,$thm_rose},bg=default]$LEFT_STARTER#[fg=#191724,bg=#{?client_prefix,$thm_love,$thm_rose},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,$thm_rose},bg=default]$RIGHT_ENDER "
 
     local show_user
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
