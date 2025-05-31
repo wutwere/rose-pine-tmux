@@ -58,7 +58,7 @@ main() {
         thm_text="#e0def4";
         thm_love="#eb6f92";
         thm_gold="#f6c177";
-        thm_rose="#65D9EF";
+        thm_rose="#f92572";
         thm_pine="#31748f";
         thm_foam="#9ccfd8";
         thm_iris="#c4a7e7";
