@@ -58,7 +58,7 @@ main() {
         thm_text="#e0def4";
         thm_love="#eb6f92";
         thm_gold="#f6c177";
-        thm_rose="#f6c177";
+        thm_rose="white";
         thm_pine="#31748f";
         thm_foam="#9ccfd8";
         thm_iris="#c4a7e7";
@@ -221,7 +221,7 @@ main() {
     readonly current_window_icon
 
     local current_session_icon
-    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "󱥇 ")"
+    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "🥀")"
     readonly current_session_icon
 
     local username_icon
@@ -256,8 +256,8 @@ main() {
     local user_window_count
     user_window_count="$(get_tmux_option "@rose_pine_window_count" "")"
 
-    local RIGHT_ENDER=""
-    local LEFT_STARTER=""
+    local RIGHT_ENDER="▓▒░"
+    local LEFT_STARTER="░▒▓"
 
     # Custom window status that goes between the number and the window name
     local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator#W"
