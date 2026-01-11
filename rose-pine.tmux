@@ -7,8 +7,6 @@
 # Inspired by dracula/tmux, catppucin/tmux & challenger-deep-theme/tmux
 #
 #
-export TMUX_ROSEPINE_DIR="$( cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)"
-
 get_tmux_option() {
     local option value default
     option="$1"
@@ -262,7 +260,27 @@ main() {
     # Custom window status that goes between the number and the window name
     # If shell is running →  directory basename
     # If program is running → ❯ full command (truncated to 30 chars)
-    local smart_window_name="#($TMUX_ROSEPINE_DIR/scripts/smart_window_name.sh '#W' '#{pane_current_path}' '#{session_name}')"
+    
+    # Logic stored in a variable for readability.
+    # NOTE: No comments allowed inside this variable because they break when flattened!
+    local window_logic="
+        c='#W';
+        p='#{pane_current_path}';
+        s='#{session_name}';
+        d=\$(basename \"\$p\");
+        x=\"\";
+        if [ \"\$d\" != \"\$s\" ]; then
+            x=\"   \$d\";
+        fi;
+        if [ \"\$c\" = \"zsh\" ]; then
+            echo \"\$x\";
+        else
+            echo \"\${x} ❯ \${c}\";
+        fi
+    "
+    
+    # Flatten the logic (remove newlines) for tmux
+    local smart_window_name="#(${window_logic//$'\n'/ })"
     local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator$smart_window_name"
     local custom_window_sep_current="#[fg=$thm_rose,bg=default]#I$window_separator$smart_window_name"
 
