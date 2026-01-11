@@ -152,7 +152,7 @@ main() {
 
     # Shows truncated current working directory
     local directory
-    directory="$(get_tmux_option "@rose_pine_directory" "on")"
+    directory="$(get_tmux_option "@rose_pine_directory" "")"
 
     local disable_active_window_menu
     disable_active_window_menu="$(get_tmux_option "@rose_pine_disable_active_window_menu" "on")"
@@ -166,7 +166,7 @@ main() {
     readonly window_directory
 
     local window_separator 
-    window_separator="$(get_tmux_option "@rose_pine_window_separator" ": ")"
+    window_separator="$(get_tmux_option "@rose_pine_window_separator" "")"
     readonly window_separator 
 
     local default_window_behavior
@@ -242,7 +242,7 @@ main() {
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
-    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "   ")"
 
     # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
@@ -260,8 +260,11 @@ main() {
     local LEFT_STARTER="░▒▓"
 
     # Custom window status that goes between the number and the window name
-    local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator#W"
-    local custom_window_sep_current="#[fg=$thm_rose,bg=default]#I$window_separator#W"
+    # If shell is running →  directory basename
+    # If program is running → ❯ full command (truncated to 30 chars)
+    local smart_window_name="#($TMUX_ROSEPINE_DIR/scripts/smart_window_name.sh '#W' '#{pane_current_path}' '#{session_name}')"
+    local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator$smart_window_name"
+    local custom_window_sep_current="#[fg=$thm_rose,bg=default]#I$window_separator$smart_window_name"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -356,29 +359,29 @@ main() {
     fi
 
     # Window appearence switcher: 3 options for the user
-    if [[ "$window_separator" != "" ]] ; then
+    # if [[ "$window_separator" != "" ]] ; then
         window_status_format=$custom_window_sep
         window_status_current_format=$custom_window_sep_current
         setw window-status-format "$window_status_format"
         setw window-status-current-format "$window_status_current_format"
 
-    elif [[ "$show_current_program" == "on" ]]; then
-        window_status_format=$show_window_in_window_status
-        window_status_current_format=$show_window_in_window_status_current
-        setw window-status-format "$window_status_format"
-        setw window-status-current-format "$window_status_current_format"
-    # See line 268
-    elif [[ "$window_directory" ]]; then
-        local window_status_format=$show_directory_in_window_status
-        local window_status_current_format=$show_directory_in_window_status_current
-        setw window-status-format "$window_status_format"
-        setw window-status-current-format "$window_status_current_format"
-        #
-    # Base behaviour, but whit cool colors
-    elif [[ "$default_window_behavior" == "on" || "$default_window_behavior" == "" ]]; then
-        unset_option window-status-format
-        unset_option window-status-current-format
-    fi
+    # elif [[ "$show_current_program" == "on" ]]; then
+    #     window_status_format=$show_window_in_window_status
+    #     window_status_current_format=$show_window_in_window_status_current
+    #     setw window-status-format "$window_status_format"
+    #     setw window-status-current-format "$window_status_current_format"
+    # # See line 268
+    # elif [[ "$window_directory" ]]; then
+    #     local window_status_format=$show_directory_in_window_status
+    #     local window_status_current_format=$show_directory_in_window_status_current
+    #     setw window-status-format "$window_status_format"
+    #     setw window-status-current-format "$window_status_current_format"
+    #     #
+    # # Base behaviour, but whit cool colors
+    # elif [[ "$default_window_behavior" == "on" || "$default_window_behavior" == "" ]]; then
+    #     unset_option window-status-format
+    #     unset_option window-status-current-format
+    # fi
 
     if [[ "$user" == "on" ]]; then
         right_column=$right_column$show_user
