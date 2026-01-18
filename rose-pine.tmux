@@ -145,7 +145,7 @@ main() {
 
     # Date and time command: follows the date UNIX command structure
     local date_time
-    date_time="$(get_tmux_option "@rose_pine_date_time" "")"
+    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%%Y-%%m-%%dT%%H:%%MZ')")"
     readonly date_time
 
     # Shows truncated current working directory
