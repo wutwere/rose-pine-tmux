@@ -56,13 +56,13 @@ main() {
         thm_text="#e0def4";
         thm_love="#eb6f92";
         thm_gold="#f6c177";
-        thm_rose="white";
+        thm_rose="#ffffff";
         thm_pine="#31748f";
         thm_foam="#9ccfd8";
         thm_iris="#c4a7e7";
         thm_hl_low="#21202e";
-        thm_hl_med="#403d52";
-        thm_hl_high="#524f67";
+        thm_hl_med="#444444";
+        thm_hl_high="#aaaaaa";
 
     elif [[ $theme == dawn ]]; then
 
@@ -145,7 +145,7 @@ main() {
 
     # Date and time command: follows the date UNIX command structure
     local date_time
-    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%%Y-%%m-%%dT%%H:%%MZ')")"
+    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%-m-%-d %-H:%%M')")"
     readonly date_time
 
     # Shows truncated current working directory
@@ -219,7 +219,7 @@ main() {
     readonly current_window_icon
 
     local current_session_icon
-    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "🥀")"
+    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "")"
     readonly current_session_icon
 
     local username_icon
@@ -240,7 +240,7 @@ main() {
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
-    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  •  ")"
 
     # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
@@ -281,8 +281,8 @@ main() {
     
     # Flatten the logic (remove newlines) for tmux
     local smart_window_name="#(${window_logic//$'\n'/ })"
-    local custom_window_sep="#[fg=#6d6a84,bg=default]#I$window_separator$smart_window_name"
-    local custom_window_sep_current="#[fg=$thm_rose,bg=default]#I$window_separator$smart_window_name"
+    local custom_window_sep="#[fg=$thm_hl_med,bg=default]#I$window_separator$smart_window_name"
+    local custom_window_sep_current="#[fg=$thm_hl_high,bg=default]#I$window_separator$smart_window_name"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -312,7 +312,7 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session="#[fg=#{?client_prefix,$thm_love,$thm_rose},bg=default]$LEFT_STARTER#[fg=#191724,bg=#{?client_prefix,$thm_love,$thm_rose},bold] $current_session_icon #S #[fg=#{?client_prefix,$thm_love,$thm_rose},bg=default]$RIGHT_ENDER "
+    readonly show_session="#[fg=#{?client_prefix,$thm_love,$thm_hl_med},bg=default] $current_session_icon#S"
 
     local show_user
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
@@ -321,7 +321,7 @@ main() {
     readonly show_host="$spacer#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
 
     local show_date_time
-    readonly show_date_time=" #[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$date_time_icon "
+    readonly show_date_time=" #[fg=$thm_hl_med]$date_time "
 
     local show_directory
     readonly show_directory="$spacer#[fg=$thm_subtle]$current_folder_icon #[fg=$thm_rose]#(echo #{pane_current_path} | sed 's#$HOME#~#g') "
@@ -365,7 +365,7 @@ main() {
     # It sets the base colors for active / inactive, no matter the window appearence switcher choice
     # TEST: This needs to be tested further
     if [[ "$bar_bg_disable" == "on" ]]; then
-        set status-style "fg=#6d6a84,bg=$bar_bg_disabled_color_option"
+        set status-style "fg=$thm_hl_med,bg=$bar_bg_disabled_color_option"
         show_window_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#W"
         show_window_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#W"
         show_directory_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
