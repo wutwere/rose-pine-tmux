@@ -124,8 +124,8 @@ main() {
     set message-command-style "fg=$thm_base,bg=$thm_gold"
 
     # Pane styling
-    set pane-border-style "fg=$thm_hl_high"
-    set pane-active-border-style "fg=$thm_gold"
+    set pane-border-style "fg=$thm_hl_low"
+    set pane-active-border-style "fg=$thm_hl_med"
     set display-panes-active-colour "${thm_text}"
     set display-panes-colour "${thm_gold}"
 
