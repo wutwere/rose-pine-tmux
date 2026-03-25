@@ -61,8 +61,12 @@ main() {
         thm_foam="#9ccfd8";
         thm_iris="#c4a7e7";
         thm_hl_low="#21202e";
-        thm_hl_med="#444444";
-        thm_hl_high="#aaaaaa";
+        # MAIN COLOR
+        thm_hl_med="#4c576d";
+        # HIGHLIGHT COLOR
+        thm_hl_high="#cce2ff";
+        # BRIGHT COLOR
+        uhhhhh="#59c2ff";
 
     elif [[ $theme == dawn ]]; then
 
@@ -145,7 +149,7 @@ main() {
 
     # Date and time command: follows the date UNIX command structure
     local date_time
-    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%-m-%-d %-H:%%M')")"
+    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%%-m-%%-d %%-H:%%M')")"
     readonly date_time
 
     # Shows truncated current working directory
@@ -270,19 +274,15 @@ main() {
         d=\$(basename \"\$p\");
         x=\"\";
         if [ \"\$d\" != \"\$s\" ]; then
-            x=\"   \$d\";
+            x=\"  \$d\";
         fi;
-        if [ \"\$c\" = \"zsh\" ]; then
-            echo \"\$x\";
-        else
-            echo \"\${x} ❯ \${c}\";
-        fi
+        echo \"\${c}\${x}\";
     "
     
     # Flatten the logic (remove newlines) for tmux
     local smart_window_name="#(${window_logic//$'\n'/ })"
-    local custom_window_sep="#[fg=$thm_hl_med,bg=default]#I$window_separator$smart_window_name"
-    local custom_window_sep_current="#[fg=$thm_hl_high,bg=default]#I$window_separator$smart_window_name"
+    local custom_window_sep="#[fg=$thm_hl_med,bg=default]$smart_window_name"
+    local custom_window_sep_current="#[fg=$uhhhhh,bg=default] #[fg=$thm_hl_high,bg=default]$smart_window_name"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
