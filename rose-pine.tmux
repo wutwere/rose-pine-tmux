@@ -149,7 +149,7 @@ main() {
 
     # Date and time command: follows the date UNIX command structure
     local date_time
-    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%%-m-%%-d %%-H:%%M')")"
+    date_time="$(get_tmux_option "@rose_pine_date_time" "#(date -u +'%%-m/%%-d %%-H:%%M')")"
     readonly date_time
 
     # Shows truncated current working directory
@@ -244,7 +244,7 @@ main() {
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
-    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  •  ")"
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" " ")"
 
     # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
@@ -274,15 +274,15 @@ main() {
         d=\$(basename \"\$p\");
         x=\"\";
         if [ \"\$d\" != \"\$s\" ]; then
-            x=\"  \$d\";
+            x=\":\$d\";
         fi;
         echo \"\${c}\${x}\";
     "
     
     # Flatten the logic (remove newlines) for tmux
     local smart_window_name="#(${window_logic//$'\n'/ })"
-    local custom_window_sep="#[fg=$thm_hl_med,bg=default]$smart_window_name"
-    local custom_window_sep_current="#[fg=$uhhhhh,bg=default] #[fg=$thm_hl_high,bg=default]$smart_window_name"
+    local inactive_window_name="#[fg=$thm_hl_med,bg=default] $smart_window_name"
+    local active_window_name="#[fg=$uhhhhh,bg=default] #[fg=$thm_hl_high,bg=default]$smart_window_name"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
@@ -378,8 +378,8 @@ main() {
 
     # Window appearence switcher: 3 options for the user
     # if [[ "$window_separator" != "" ]] ; then
-        window_status_format=$custom_window_sep
-        window_status_current_format=$custom_window_sep_current
+        window_status_format=$inactive_window_name
+        window_status_current_format=$active_window_name
         setw window-status-format "$window_status_format"
         setw window-status-current-format "$window_status_current_format"
 
