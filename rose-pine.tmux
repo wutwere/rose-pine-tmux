@@ -281,8 +281,8 @@ main() {
     
     # Flatten the logic (remove newlines) for tmux
     local smart_window_name="#(${window_logic//$'\n'/ })"
-    local inactive_window_name="#[fg=$thm_hl_med,bg=default] $smart_window_name"
-    local active_window_name="#[fg=$uhhhhh,bg=default] #[fg=$thm_hl_high,bg=default]$smart_window_name"
+    local inactive_window_name="#[fg=$uhhhhh,bg=default]#I #[fg=$thm_hl_med,bg=default]$smart_window_name"
+    local active_window_name="#[fg=$uhhhhh,bg=default]#I #[fg=$thm_hl_high,bg=default]$smart_window_name"
 
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
